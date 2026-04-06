@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko" data-theme="night">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pomodoro Timer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <div class="header">
+      <div>
+        <h1>뽀모도로 타이머</h1>
+        <p class="subtitle">집중 시간과 휴식 시간을 설정하고, PC 브라우저에서 바로 사용할 수 있어요.</p>
+      </div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="색상 모드 변경">☾ 나이트 모드</button>
+    </div>
+
+    <div class="app-layout">
+      <section class="timer-panel" aria-label="타이머 표시">
+        <div class="timer" aria-live="polite">
+          <div class="time" id="time">25:00</div>
+          <button class="pip-toggle" id="pip" type="button" aria-label="타이머 숫자 PIP로 보기">PIP</button>
+        </div>
+
+        <p class="state" id="state">준비됐어요. 시작을 누르면 집중 시간이 흘러갑니다.</p>
+      </section>
+
+      <section class="control-panel" aria-label="타이머 조작">
+        <div class="mode-tabs" aria-label="타이머 모드">
+          <button class="active" data-mode="focus" type="button">집중</button>
+          <button data-mode="shortBreak" type="button">짧은 휴식</button>
+          <button data-mode="longBreak" type="button">긴 휴식</button>
+        </div>
+
+        <div class="controls">
+          <button id="startPause" type="button">시작</button>
+          <button id="reset" type="button">리셋</button>
+          <button id="skip" type="button">다음 모드</button>
+        </div>
+
+        <form class="settings" id="settings">
+          <label>
+            집중(분)
+            <input id="focusMinutes" min="1" max="180" type="number" value="25">
+          </label>
+          <label>
+            짧은 휴식(분)
+            <input id="shortBreakMinutes" min="1" max="60" type="number" value="5">
+          </label>
+          <label>
+            긴 휴식(분)
+            <input id="longBreakMinutes" min="1" max="90" type="number" value="15">
+          </label>
+          <button type="submit">설정 저장</button>
+        </form>
+
+        <p class="hint">타이머가 끝나면 소리가 나고 자동으로 다음 모드로 넘어갑니다. 시간 설정과 색상 모드는 브라우저에 저장돼요.</p>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/pip.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

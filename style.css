@@ -1,0 +1,357 @@
+:root {
+  color-scheme: dark;
+  --bg: #050507;
+  --bg-glow-1: rgba(10, 132, 255, 0.28);
+  --bg-glow-2: rgba(94, 92, 230, 0.22);
+  --card-bg: linear-gradient(145deg, rgba(44, 44, 46, 0.86), rgba(28, 28, 30, 0.72));
+  --card-border: rgba(255, 255, 255, 0.12);
+  --panel: rgba(255, 255, 255, 0.08);
+  --panel-strong: rgba(255, 255, 255, 0.16);
+  --tabs-bg: rgba(255, 255, 255, 0.07);
+  --input-bg: rgba(0, 0, 0, 0.24);
+  --text: #f5f5f7;
+  --muted: #a1a1a6;
+  --accent: #0a84ff;
+  --accent-contrast: #ffffff;
+  --accent-2: #2c2c2e;
+  --active-text: #f5f5f7;
+  --ring: rgba(10, 132, 255, 0.26);
+  --track: rgba(255, 255, 255, 0.12);
+  --timer-core: #111113;
+  --focus-ring: rgba(10, 132, 255, 0.52);
+  --shadow: rgba(0, 0, 0, 0.5);
+  font-family: "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+
+html[data-theme="day"] {
+  color-scheme: light;
+  --bg: #f7efe1;
+  --bg-glow-1: rgba(255, 183, 77, 0.55);
+  --bg-glow-2: rgba(94, 151, 246, 0.24);
+  --card-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(255, 248, 235, 0.78));
+  --card-border: rgba(117, 82, 36, 0.16);
+  --panel: rgba(117, 82, 36, 0.09);
+  --panel-strong: rgba(117, 82, 36, 0.16);
+  --tabs-bg: rgba(117, 82, 36, 0.12);
+  --input-bg: rgba(255, 255, 255, 0.72);
+  --text: #2d2418;
+  --muted: #725f47;
+  --accent: #ef7b45;
+  --accent-contrast: #2d160d;
+  --accent-2: #ffe08a;
+  --active-text: #3a2606;
+  --ring: rgba(239, 123, 69, 0.24);
+  --track: rgba(117, 82, 36, 0.14);
+  --timer-core: #fff8ea;
+  --focus-ring: rgba(239, 123, 69, 0.42);
+  --shadow: rgba(117, 82, 36, 0.2);
+}
+
+html[data-theme="day"] .mode-tabs button.active {
+  background: var(--accent-2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background:
+    radial-gradient(circle at top left, var(--bg-glow-1), transparent 32rem),
+    radial-gradient(circle at bottom right, var(--bg-glow-2), transparent 34rem),
+    var(--bg);
+  color: var(--text);
+  transition: background 220ms ease, color 220ms ease;
+}
+
+main {
+  width: min(100%, 520px);
+  padding: 2rem;
+  border: 1px solid var(--card-border);
+  border-radius: 28px;
+  background: var(--card-bg);
+  box-shadow: 0 24px 80px var(--shadow);
+  backdrop-filter: blur(22px);
+}
+
+.app-layout {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.timer-panel,
+.control-panel {
+  min-width: 0;
+}
+
+.timer-panel {
+  display: grid;
+  align-content: center;
+}
+
+.control-panel {
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+h1 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  letter-spacing: -0.04em;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2.5rem;
+  padding: 0 0.95rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 10px 30px var(--shadow);
+  backdrop-filter: blur(14px);
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+.mode-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  padding: 0.35rem;
+  border-radius: 999px;
+  background: var(--tabs-bg);
+}
+
+.mode-tabs button,
+.controls button,
+.settings button,
+.pip-toggle {
+  border: 0;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.mode-tabs button {
+  padding: 0.75rem 0.5rem;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  transition: 160ms ease;
+}
+
+.mode-tabs button.active {
+  color: var(--active-text);
+  background: var(--accent);
+  font-weight: 700;
+}
+
+.timer {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(72vw, 340px);
+  aspect-ratio: 1;
+  margin: 0 auto 1.75rem;
+  border-radius: 50%;
+  background:
+    conic-gradient(var(--accent) var(--progress, 0%), var(--track) 0),
+    radial-gradient(circle, var(--timer-core) 63%, transparent 64%);
+  box-shadow: 0 0 0 14px var(--ring), inset 0 0 40px var(--shadow);
+}
+
+.timer::after {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--card-border);
+  pointer-events: none;
+}
+
+.pip-toggle {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 2;
+  min-height: 2.25rem;
+  padding: 0 0.8rem;
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 800;
+  box-shadow: 0 10px 30px var(--shadow);
+  backdrop-filter: blur(12px);
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+.time {
+  z-index: 1;
+  font-size: clamp(4rem, 16vw, 6rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.08em;
+}
+
+.state {
+  min-height: 1.6rem;
+  margin: 0 0 1rem;
+  text-align: center;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.controls button,
+.settings button {
+  min-height: 3rem;
+  border-radius: 16px;
+  background: var(--panel);
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+.theme-toggle:hover,
+.pip-toggle:hover,
+.controls button:hover,
+.settings button:hover {
+  transform: translateY(-1px);
+  background: var(--panel-strong);
+}
+
+#startPause {
+  grid-column: 1 / -1;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 800;
+}
+
+.settings {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--card-border);
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+input {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 0 0.8rem;
+  color: var(--text);
+  background: var(--input-bg);
+  font: inherit;
+}
+
+input:focus,
+button:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.settings button {
+  grid-column: 1 / -1;
+  font-weight: 700;
+}
+
+.hint {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  body {
+    padding: 1rem;
+  }
+
+  main {
+    padding: 1.25rem;
+    border-radius: 22px;
+  }
+
+  .header {
+    display: grid;
+  }
+
+  .settings {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 840px) {
+  main {
+    width: min(94vw, 980px);
+    padding: 2.5rem;
+  }
+
+  .header {
+    margin-bottom: 2.25rem;
+  }
+
+  .app-layout {
+    grid-template-columns: minmax(340px, 0.95fr) minmax(360px, 1.05fr);
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .timer {
+    width: min(36vw, 380px);
+    margin-bottom: 1.5rem;
+  }
+
+  .time {
+    font-size: clamp(4.6rem, 8vw, 6.5rem);
+  }
+
+  .state {
+    margin-bottom: 0;
+  }
+}
