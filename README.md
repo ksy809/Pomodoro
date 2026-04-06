@@ -6,7 +6,10 @@ PC에서 브라우저로 바로 실행하는 뽀모도로 타이머입니다.
 🔗 배포 링크: https://p0m0d0r0-timer.netlify.app
 
 ## 화면
-![메인화면](./screenshot.png)
+- 데이 모드
+![메인화면](./daymode.png)
+- 나이트 모드
+![메인화면](./nightmode.png)
 
 
 ## 실행 방법
